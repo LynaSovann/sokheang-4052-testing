@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sokheang-4052-testing
+  namespace: argocd
+  annotations:
+    notifications.argoproj.io/subscribe.on-sync-succeeded.telegram: "-1002195638358"
+    notifications.argoproj.io/subscribe.on-sync-failed.telegram: "-1002195638358"
+    notifications.argoproj.io/subscribe.on-deleted.telegram: "-1002195638358"
+    notifications.argoproj.io/subscribe.on-sync-succeeded.updateDeploymentStatusWebhook: ""
+    notifications.argoproj.io/subscribe.on-sync-succeeded.gmail: sovannlyna2004@gmail.com
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/LynaSovann/sokheang-4052-testing.git
+    targetRevision: main
+    path: manifests
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: sokheang-4052-testing
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  revisionHistoryLimit: 5
