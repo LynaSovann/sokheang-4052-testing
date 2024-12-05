@@ -1,0 +1,30 @@
+ apiVersion: networking.k8s.io/v1
+ kind: Ingress
+ metadata:
+   name: sokheang-4052-testing-https-ingress
+   namespace: sokheang-4052-testing
+   annotations:
+     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+     nginx.ingress.kubernetes.io/use-regex: "true"
+     nginx.ingress.kubernetes.io/proxy-body-size: "5g"    
+     nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+     nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+     nginx.ingress.kubernetes.io/rewrite-target: /
+ spec:
+   ingressClassName: nginx
+   tls:
+     - hosts:
+         - sokheang-4052-testing.assessify.org
+       secretName: sokheang-4052-testing-secret-tls
+   rules:
+     - host: sokheang-4052-testing.assessify.org
+       http:
+         paths:
+           - path: /
+             pathType: Prefix
+             backend:
+               service:
+                 name: sokheang-4052-testing-service
+                 port:
+                   number: 8338
+ 
