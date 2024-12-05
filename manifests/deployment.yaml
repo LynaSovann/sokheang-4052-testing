@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sokheang-4052-testing-deployment
+  labels:
+    app: sokheang-4052-testing
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sokheang-4052-testing
+  template:
+    metadata:
+      labels:
+        app: sokheang-4052-testing
+    spec:
+      containers:
+        - name: sokheang-4052-testing-container
+          image: pipejet/sokheang-4052-testing:latest
+          ports:
+            - containerPort: 3000
