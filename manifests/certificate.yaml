@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: sokheang-4052-testing-certificate
+  namespace: sokheang-4052-testing
+spec:
+  secretName: sokheang-4052-testing-secret-tls
+  commonName: sokheang-4052-testing.assessify.org
+  dnsNames:
+  - sokheang-4052-testing.assessify.org
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
